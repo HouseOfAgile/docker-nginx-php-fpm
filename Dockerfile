@@ -47,18 +47,19 @@ ADD ./private/id_rsa /root/.ssh/id_rsa
 
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-ADD ./private/sm-config /root/.symfony-manager/sm-config
+ADD ./config/sm-config /root/.symfony-manager/sm-config
 ADD ./default-symfony-nginx.conf /tmp/default-symfony-nginx.conf
 
 ADD ./setup-projects.sh /tmp/setup-projects.sh
 RUN /tmp/setup-projects.sh
 
-ADD ./config/nginx-conf /etc/nginx/sites-available
-RUN for conf in `/etc/nginx/sites-available`;do ln -s /etc/nginx/sites-available/$conf /etc/nginx/sites-enabled/$conf;done
-
-RUN echo "<?php phpinfo(); ?>" > /srv/www/phpinfo.php
+RUN mkdir           /etc/service/nginx
+ADD build/nginx.sh  /etc/service/nginx/run
+RUN chmod +x        /etc/service/nginx/run
+RUN mkdir           /etc/service/phpfpm
+ADD build/php5-fpm.sh /etc/service/phpfpm/run
+RUN chmod +x        /etc/service/phpfpm/run
 
 EXPOSE 80
 
-#CMD service php5-fpm start && nginx
 CMD ["/sbin/my_init"]
