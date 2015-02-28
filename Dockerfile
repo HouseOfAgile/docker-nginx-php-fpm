@@ -50,15 +50,16 @@ RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 ADD ./config/sm-config /root/.symfony-manager/sm-config
 ADD ./default-symfony-nginx.conf /tmp/default-symfony-nginx.conf
 
-ADD ./setup-projects.sh /tmp/setup-projects.sh
-RUN /tmp/setup-projects.sh
+RUN mkdir -p /etc/my_init.d
+ADD setup-projects.sh /etc/my_init.d/setup-projects.sh
 
-RUN mkdir           /etc/service/nginx
-ADD build/nginx.sh  /etc/service/nginx/run
-RUN chmod +x        /etc/service/nginx/run
-RUN mkdir           /etc/service/phpfpm
-ADD build/php5-fpm.sh /etc/service/phpfpm/run
-RUN chmod +x        /etc/service/phpfpm/run
+RUN mkdir           /etc/service/01_phpfpm
+ADD build/php5-fpm.sh /etc/service/01_phpfpm/run
+RUN chmod +x        /etc/service/01_phpfpm/run
+
+RUN mkdir           /etc/service/02_nginx
+ADD build/nginx.sh  /etc/service/02_nginx/run
+RUN chmod +x        /etc/service/02_nginx/run
 
 EXPOSE 80
 

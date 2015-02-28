@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-nginx
+nginx -g 'daemon off;'
