@@ -26,6 +26,7 @@ RUN apt-get install -y python-software-properties python g++ make
 
 RUN apt-get install -y nodejs
 RUN npm install less -g
+RUN npm install -g bower
 
 RUN apt-get install -y redis-server memcached php5-memcache
 
