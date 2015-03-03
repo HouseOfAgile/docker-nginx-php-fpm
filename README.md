@@ -1,5 +1,7 @@
-docker-nginx-php5
+docker-nginx-php-fpm
 =================
 
-Simple docker for a simple ubuntu engince with nginx 
-with php5 app
+Simple docker for symfony projects.
+Based on nginx and php-fpm 
+Support for bash-profile
+Support for symfony manager
