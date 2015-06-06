@@ -36,7 +36,7 @@ RUN mkdir -p /root/docker-config
 ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
 
 RUN mkdir -p /etc/my_init.d
-ADD setup_default_vhost.sh /etc/my_init.d/setup_default_vhost.sh
+ADD setup_bash_profile.sh /etc/my_init.d/setup_bash_profile.sh
 
 RUN mkdir           /etc/service/01_phpfpm
 ADD build/php5-fpm.sh /etc/service/01_phpfpm/run
