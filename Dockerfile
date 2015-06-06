@@ -9,7 +9,7 @@ RUN apt-get -y install python-software-properties
 RUN apt-get -y install nginx
 
 RUN mkdir /srv/www
-RUN echo "HTML is working and that's it !" > /srv/www/nginx-container.html
+RUN echo "HTML is working with php <?php phpversion('tidy');?> and that's it !" > /srv/www/default/nginx-container.html
 
 RUN apt-get -y install software-properties-common
 
