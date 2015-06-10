@@ -18,8 +18,7 @@ RUN apt-get -y install git-core
 RUN apt-get -y install php5-fpm php5-mysql php-apc php5-imagick php5-imap php5-mcrypt php5-curl php5-cli php5-gd php5-pgsql php5-sqlite php5-common php-pear curl php5-json php5-intl
 RUN apt-get install -y python-software-properties python g++ make
 
-RUN mkdir /usr/share/nginx/default
-RUN echo "HTML is working with php <?php phpversion('tidy');?> and that's it !" > /usr/share/nginx/default/nginx-container.html
+RUN echo "HTML is working with php <?php phpversion('tidy');?> and that's it !" > /usr/share/nginx/html/nginx-container.html
 
 RUN chown www-data -R /usr/share/nginx/
 
