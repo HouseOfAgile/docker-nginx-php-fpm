@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.16
+FROM phusion/baseimage:0.9.18
 
 MAINTAINER Meillaud Jean-Christophe (jc.meillaud@gmail.com)
 
