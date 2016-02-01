@@ -31,9 +31,6 @@ ADD ./private/id_rsa /root/.ssh/id_rsa
 
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN mkdir -p /root/docker-config
-ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
-
 RUN mkdir -p /etc/my_init.d
 ADD setup_bash_profile.sh /etc/my_init.d/setup_bash_profile.sh
 
