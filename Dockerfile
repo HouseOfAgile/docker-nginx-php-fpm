@@ -22,13 +22,6 @@ RUN echo "HTML is working with php <?php phpversion('tidy');?> and that's it !" 
 
 RUN chown www-data -R /usr/share/nginx/
 
-## Install SSH for a specific user (thanks to public key)
-ADD ./private/id_rsa.pub /tmp/your_key
-RUN cat /tmp/your_key >> /root/.ssh/authorized_keys && rm -f /tmp/your_key
-
-# Add private key in order to get access to private repo
-ADD ./private/id_rsa /root/.ssh/id_rsa
-
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
 RUN mkdir -p /etc/my_init.d
