@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.9.18
 
-MAINTAINER Meillaud Jean-Christophe (jc.meillaud@gmail.com)
+MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
 ENV HOME /root
 
