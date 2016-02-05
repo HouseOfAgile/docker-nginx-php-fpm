@@ -24,8 +24,8 @@ RUN chown www-data -R /usr/share/nginx/
 
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN mkdir -p /etc/my_init.d
-ADD setup_bash_profile.sh /etc/my_init.d/setup_bash_profile.sh
+ADD ./default_bash_profile /root/.bash_profile
+RUN curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash
 
 RUN mkdir           /etc/service/01_phpfpm
 ADD build/php5-fpm.sh /etc/service/01_phpfpm/run
