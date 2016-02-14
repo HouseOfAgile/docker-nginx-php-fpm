@@ -10,7 +10,6 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C
 RUN add-apt-repository -y ppa:ondrej/php5-5.6
 RUN apt-get update && apt-get install -y python-software-properties
 RUN apt-get update && apt-get install -y \ 
-  python-software-properties \
   nginx \
   software-properties-common \
   git-core \
