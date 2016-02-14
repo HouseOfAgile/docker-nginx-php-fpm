@@ -4,21 +4,36 @@ MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
 ENV HOME /root
 
-RUN apt-get update
-RUN apt-get -y install python-software-properties
-RUN apt-get -y install nginx
+# PHP > 5.6
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C
 
-RUN apt-get -y install software-properties-common
-
-# PHP > 5.4
-RUN add-apt-repository ppa:ondrej/php5-oldstable
-
-RUN apt-get -y install git-core
-
-RUN apt-get -y install php5-fpm php5-mysql php-apc php5-imagick php5-imap php5-mcrypt php5-curl php5-cli php5-gd php5-pgsql php5-sqlite php5-common php-pear curl php5-json php5-intl
-RUN apt-get install -y python-software-properties python g++ make
-
-RUN echo "HTML is working with php <?php phpversion('tidy');?> and that's it !" > /usr/share/nginx/html/nginx-container.html
+RUN add-apt-repository -y ppa:ondrej/php5-5.6
+RUN apt-get update && apt-get install -y python-software-properties
+RUN apt-get update && apt-get install -y \ 
+  python-software-properties \
+  nginx \
+  software-properties-common \
+  git-core \
+  php5 \
+  php5-fpm \
+  php5-mysql \
+  php-apc \ 
+  php5-imagick \
+  php5-imap \
+  php5-mcrypt \
+  php5-curl \
+  php5-cli \
+  php5-gd \
+  php5-pgsql \
+  php5-sqlite \
+  php5-common \
+  php-pear \
+  curl \
+  php5-json \
+  php5-intl \
+  python \ 
+  g++ \
+  make
 
 RUN chown www-data -R /usr/share/nginx/
 
