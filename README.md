@@ -9,6 +9,12 @@ Based on nginx and php-fpm
 Support for bash-profile
 Support for symfony manager
 
+## For php5-fpm
+Use the php5 branch
 
+    $  docker build -t "houseofagile/docker-nginx-php-fpm:php5" .
+    
+## For php7-fpm
+Use the php7 branch
 
-    $  docker build -t "houseofagile/docker-nginx-php-fpm:latest" .
+    $  docker build -t "houseofagile/docker-nginx-php-fpm:php7" .
