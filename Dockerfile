@@ -5,15 +5,13 @@ MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 ENV HOME /root
 
 # PHP > 5.6
-RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C
-
-RUN add-apt-repository -y ppa:ondrej/php5-5.6
+RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update && apt-get install -y python-software-properties
 RUN apt-get update && apt-get install -y \ 
   nginx \
   software-properties-common \
   git-core \
-  php5 \
+  php5.6 \
   php5-fpm \
   php5-mysql \
   php-apc \ 
