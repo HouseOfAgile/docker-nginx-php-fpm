@@ -30,22 +30,17 @@ RUN apt-get update && apt-get install -y \
   php5-intl \
   python \ 
   g++ \
-  make
+  make && \
+  chown www-data -R /usr/share/nginx/ && \
+  echo "source ~/.bashrc">>/root/.bash_profile && \
+  curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash && \
+  apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN chown www-data -R /usr/share/nginx/
-
-RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
-
-ADD ./default_bash_profile /root/.bash_profile
-RUN curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash
-
-RUN mkdir           /etc/service/01_phpfpm
-ADD build/php5-fpm.sh /etc/service/01_phpfpm/run
-RUN chmod +x        /etc/service/01_phpfpm/run
-
-RUN mkdir           /etc/service/02_nginx
-ADD build/nginx.sh  /etc/service/02_nginx/run
-RUN chmod +x        /etc/service/02_nginx/run
+RUN mkdir -p {/etc/my_init.d/01_phpfpm,/etc/my_init.d/02_nginx}
+ADD ../build/php5-fpm.sh /etc/my_init.d/01_phpfpm.sh
+ADD ../build/nginx.sh  /etc/my_init.d/02_nginx.sh
+RUN chmod +x /etc/my_init.d/02_nginx.sh /etc/my_init.d/01_phpfpm.sh
+RUN service php5-fpm start
 
 EXPOSE 80
 

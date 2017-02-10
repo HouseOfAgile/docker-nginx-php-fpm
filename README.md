@@ -10,12 +10,12 @@ Support for bash-profile
 Support for symfony manager
 
 ## Raw usage with php5-fpm
-Use the php5 branch
+Use the php5-fpm version
 
     $  docker build -t "houseofagile/docker-nginx-php-fpm:php5" .
     
 ## Raw usage php7-fpm
-Use the php7 branch
+Use the php7.0-fpm version
 
     $  docker build -t "houseofagile/docker-nginx-php-fpm:php7" .
 
