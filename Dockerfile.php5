@@ -36,10 +36,10 @@ RUN add-apt-repository -y ppa:ondrej/php && \
   curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash && \
   apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN mkdir -p {/etc/service/phpfpm,/etc/service/nginx} && \
-  echo "#"'!'"/usr/bin/env bash\nphp5-fpm -F -c /etc/php5/fpm" >/etc/service/phpfpm/run && \
-  echo "#"'!'"/bin/sh\nnginx -g 'daemon off;'" >/etc/service/nginx/run && \
-  chmod +x /etc/service/phpfpm/run /etc/service/nginx/run
+RUN mkdir /etc/service/{01_phpfpm,02_nginx}
+ADD build/php5-fpm.sh /etc/service/01_phpfpm/run
+ADD build/nginx.sh  /etc/service/02_nginx/run
+RUN chmod +x /etc/service/01_phpfpm/run /etc/service/02_nginx/run
 
 EXPOSE 80
 

@@ -11,17 +11,17 @@ Support for symfony manager
 
 ## Raw usage with php5-fpm
 Use the php5-fpm version
-- [`Dockerfile for php 5.6`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/php5-fpm/Dockerfile)
-- [`Dockerfile for php 7.0`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/php7.0-fpm/Dockerfile)
+- [`Dockerfile for php 5.6`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php5)
+- [`Dockerfile for php 7.0`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php7)
 
 ## pull image from docker hub
 ### php5-fpm
 
-    $  docker build -t "houseofagile/docker-nginx-php-fpm:php5" .
+    $  docker build -f Dockerfile.php5 -t "houseofagile/docker-nginx-php-fpm:php5" .
     
 ### php7.0-fpm
 
-    $  docker build -t "houseofagile/docker-nginx-php-fpm:php7" .
+    $  docker build -f Dockerfile.php7 -t "houseofagile/docker-nginx-php-fpm:php7" .
 
 ## How to launch  a docker instance with nginx and php-fpm
 
