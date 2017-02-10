@@ -11,11 +11,15 @@ Support for symfony manager
 
 ## Raw usage with php5-fpm
 Use the php5-fpm version
+- [`Dockerfile for php 5.6`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/php5-fpm/Dockerfile)
+- [`Dockerfile for php 7.0`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/php7.0-fpm/Dockerfile)
+
+## pull image from docker hub
+### php5-fpm
 
     $  docker build -t "houseofagile/docker-nginx-php-fpm:php5" .
     
-## Raw usage php7-fpm
-Use the php7.0-fpm version
+### php7.0-fpm
 
     $  docker build -t "houseofagile/docker-nginx-php-fpm:php7" .
 
