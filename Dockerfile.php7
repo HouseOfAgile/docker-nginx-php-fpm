@@ -40,7 +40,7 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C &&
   curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash && \
   apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN mkdir /etc/service/{01_phpfpm,02_nginx}
+RUN mkdir /etc/service/01_phpfpm /etc/service/02_nginx
 ADD build/php7.0-fpm.sh /etc/service/01_phpfpm/run
 ADD build/nginx.sh  /etc/service/02_nginx/run
 RUN chmod +x /etc/service/01_phpfpm/run /etc/service/02_nginx/run
