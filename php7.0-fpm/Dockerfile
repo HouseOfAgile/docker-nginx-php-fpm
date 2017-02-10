@@ -5,11 +5,10 @@ MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 ENV HOME /root
 
 # PHP >7
-RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C
-
-RUN add-apt-repository -y ppa:ondrej/php
-RUN apt-get update && apt-get install -y python-software-properties
-RUN apt-get update && apt-get install -y \
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C && \
+  add-apt-repository -y ppa:ondrej/php && \
+  apt-get update && apt-get install -y python-software-properties && \
+  apt-get update && apt-get install -y \
   nginx \
   software-properties-common \
   git-core \
@@ -41,11 +40,10 @@ RUN apt-get update && apt-get install -y \
   curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash && \
   apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN mkdir -p {/etc/my_init.d/01_phpfpm,/etc/my_init.d/02_nginx} && \
-  echo "#"'!'"/usr/bin/env bash\nphp-fpm7.0 -c /etc/php/7.0/fpm" >/etc/my_init.d/01_phpfpm.sh && \
-  echo "#"'!'"/bin/sh\nnginx -g 'daemon off;'" >/etc/my_init.d/02_nginx.sh && \
-  chmod +x /etc/my_init.d/01_phpfpm.sh /etc/my_init.d/02_nginx.sh && \
-  service php7.0-fpm start
+RUN mkdir -p {/etc/service/phpfpm,/etc/service/nginx} && \
+  echo "#"'!'"/usr/bin/env bash\nphp-fpm7.0 -F -c /etc/php/7.0/fpm" >/etc/service/phpfpm/run && \
+  echo "#"'!'"/bin/sh\nnginx -g 'daemon off;'" >/etc/service/nginx/run && \
+  chmod +x /etc/service/phpfpm/run /etc/service/nginx/run
 EXPOSE 80
 
 CMD ["/sbin/my_init"]

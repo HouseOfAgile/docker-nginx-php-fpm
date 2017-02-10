@@ -4,10 +4,10 @@ MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
 ENV HOME /root
 
-# PHP > 5.6
-RUN add-apt-repository -y ppa:ondrej/php
-RUN apt-get update && apt-get install -y python-software-properties
-RUN apt-get update && apt-get install -y \ 
+# PHP 5.6
+RUN add-apt-repository -y ppa:ondrej/php && \
+  apt-get update && apt-get install -y python-software-properties && \
+  apt-get update && apt-get install -y \
   nginx \
   software-properties-common \
   git-core \
@@ -36,11 +36,10 @@ RUN apt-get update && apt-get install -y \
   curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash && \
   apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN mkdir -p {/etc/my_init.d/01_phpfpm,/etc/my_init.d/02_nginx} && \
-  echo "#"'!'"/usr/bin/env bash\nphp5-fpm -F -c /etc/php5/fpm" >/etc/my_init.d/01_phpfpm.sh && \
-  echo "#"'!'"/bin/sh\nnginx -g 'daemon off;'" >/etc/my_init.d/02_nginx.sh && \
-  chmod +x /etc/my_init.d/01_phpfpm.sh /etc/my_init.d/02_nginx.sh && \
-  service php5-fpm start
+RUN mkdir -p {/etc/service/phpfpm,/etc/service/nginx} && \
+  echo "#"'!'"/usr/bin/env bash\nphp5-fpm -F -c /etc/php5/fpm" >/etc/service/phpfpm/run && \
+  echo "#"'!'"/bin/sh\nnginx -g 'daemon off;'" >/etc/service/nginx/run && \
+  chmod +x /etc/service/phpfpm/run /etc/service/nginx/run
 
 EXPOSE 80
 
