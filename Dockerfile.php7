@@ -45,6 +45,8 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C &&
 ADD nginx-default.conf /etc/nginx/sites-available/default
 RUN sed -i 's#%%php_fpm_sock_file%%#/run/php/php7.0-fpm.sock#g' /etc/nginx/sites-available/default && \
   echo "<?php\nphpinfo();">/var/www/html/index.php
+
+# nginx and php-fpm7.0 service
 RUN mkdir /etc/service/01_phpfpm /etc/service/02_nginx
 ADD build/php7.0-fpm.sh /etc/service/01_phpfpm/run
 ADD build/nginx.sh  /etc/service/02_nginx/run
