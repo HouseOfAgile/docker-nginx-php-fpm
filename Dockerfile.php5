@@ -29,7 +29,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   curl \
   php5.6-json \
   php5.6-intl \
-  python \ 
+  python \
   g++ \
   make && \
   chown www-data -R /usr/share/nginx/ && \
@@ -45,7 +45,7 @@ RUN sed -i 's#%%php_fpm_sock_file%%#/var/run/php/php5.6-fpm.sock#g' /etc/nginx/s
 
 # nginx and php-fpm5.6 service
 RUN mkdir /etc/service/01_phpfpm /etc/service/02_nginx
-ADD build/php5-fpm.sh /etc/service/01_phpfpm/run
+RUN echo "#!/usr/bin/env bash\nphp-fpm5.6 -F -c /etc/php5/fpm" > /etc/service/01_phpfpm/run
 ADD build/nginx.sh  /etc/service/02_nginx/run
 RUN chmod +x /etc/service/01_phpfpm/run /etc/service/02_nginx/run
 

@@ -20,13 +20,13 @@ Use the php5-fpm version
 
     $  docker build -f Dockerfile.php5 -t "houseofagile/docker-nginx-php-fpm:php5" .
 
-### php7.0-fpm
+### php7.[0-2]-fpm
 
     $  docker build -f Dockerfile.php7.0 -t "houseofagile/docker-nginx-php-fpm:php7.0" .
 
-### php7.1-fpm
-
     $  docker build -f Dockerfile.php7.1 -t "houseofagile/docker-nginx-php-fpm:php7.1" .
+
+    $  docker build -f Dockerfile.php7.2 -t "houseofagile/docker-nginx-php-fpm:php7.2" .
 
 ## How to launch  a docker instance with nginx and php-fpm
 

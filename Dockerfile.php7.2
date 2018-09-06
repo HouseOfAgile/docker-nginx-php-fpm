@@ -12,25 +12,25 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C &&
   nginx \
   software-properties-common \
   git-core \
-  php7.0 \
-  php7.0-fpm \
-  php7.0-mysql \
-  php7.0-imagick \
-  php7.0-imap \
-  php7.0-mcrypt \
-  php7.0-curl \
-  php7.0-cli \
-  php7.0-gd \
-  php7.0-pgsql \
-  php7.0-sqlite \
-  php7.0-common \
+  php7.2 \
+  php7.2-fpm \
+  php7.2-mysql \
+  php7.2-imagick \
+  php7.2-imap \
+  php7.2-mcrypt \
+  php7.2-curl \
+  php7.2-cli \
+  php7.2-gd \
+  php7.2-pgsql \
+  php7.2-sqlite \
+  php7.2-common \
   php-pear \
   curl \
-  php7.0-json \
-  php7.0-intl \
-  php7.0-xml \
-  php7.0-mbstring \
-  php7.0-zip \
+  php7.2-json \
+  php7.2-intl \
+  php7.2-xml \
+  php7.2-mbstring \
+  php7.2-zip \
   php-apcu \
   python \
   g++ \
@@ -39,16 +39,16 @@ RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C &&
   echo "source ~/.bashrc">>/root/.bash_profile && \
   curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash && \
   apt-get clean && rm -rf /tmp/* /var/tmp/* && \
-  service php7.0-fpm start
+  service php7.2-fpm start
 
 # generate a simple index file with phpinfo
 ADD nginx-default.conf /etc/nginx/sites-available/default
-RUN sed -i 's#%%php_fpm_sock_file%%#/run/php/php7.0-fpm.sock#g' /etc/nginx/sites-available/default && \
+RUN sed -i 's#%%php_fpm_sock_file%%#/run/php/php7.2-fpm.sock#g' /etc/nginx/sites-available/default && \
   echo "<?php\nphpinfo();">/var/www/html/index.php
 
-# nginx and php-fpm7.0 service
+# nginx and php-fpm7.2 service
 RUN mkdir /etc/service/01_phpfpm /etc/service/02_nginx
-RUN echo "#!/usr/bin/env bash\nphp-fpm7.0 -F -c /etc/php/7.0/fpm" > /etc/service/01_phpfpm/run
+RUN echo "#!/usr/bin/env bash\nphp-fpm7.2 -F -c /etc/php/7.2/fpm" > /etc/service/01_phpfpm/run
 ADD build/nginx.sh  /etc/service/02_nginx/run
 RUN chmod +x /etc/service/01_phpfpm/run /etc/service/02_nginx/run
 

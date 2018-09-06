@@ -46,9 +46,9 @@ ADD nginx-default.conf /etc/nginx/sites-available/default
 RUN sed -i 's#%%php_fpm_sock_file%%#/run/php/php7.1-fpm.sock#g' /etc/nginx/sites-available/default && \
   echo "<?php\nphpinfo();">/var/www/html/index.php
 
-# nginx and php-fpm7.0 service
+# nginx and php-fpm7.1 service
 RUN mkdir /etc/service/01_phpfpm /etc/service/02_nginx
-ADD build/php7.1-fpm.sh /etc/service/01_phpfpm/run
+RUN echo "#!/usr/bin/env bash\nphp-fpm7.1 -F -c /etc/php/7.1/fpm" > /etc/service/01_phpfpm/run
 ADD build/nginx.sh  /etc/service/02_nginx/run
 RUN chmod +x /etc/service/01_phpfpm/run /etc/service/02_nginx/run
 
