@@ -5,23 +5,25 @@ docker-nginx-php-fpm
 
 
 Simple docker for symfony projects.
-Based on nginx and php-fpm 
+Based on nginx and php-fpm
 Support for bash-profile
 Support for symfony manager
 
 ## Raw usage with php5-fpm
 Use the php5-fpm version
 - [`Dockerfile for php 5.6`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php5)
-- [`Dockerfile for php 7.0`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php7)
+- [`Dockerfile for php 7.0`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php7.0)
+- [`Dockerfile for php 5.6`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php5)
+- [`Dockerfile for php 7.1`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php7.1)
 
 ## pull image from docker hub
 ### php5-fpm
 
     $  docker build -f Dockerfile.php5 -t "houseofagile/docker-nginx-php-fpm:php5" .
-    
+
 ### php7.0-fpm
 
-    $  docker build -f Dockerfile.php7 -t "houseofagile/docker-nginx-php-fpm:php7" .
+    $  docker build -f Dockerfile.php7.0 -t "houseofagile/docker-nginx-php-fpm:php7.0" .
 
 ## How to launch  a docker instance with nginx and php-fpm
 
@@ -32,8 +34,8 @@ Use either docker compose or Dockerfile to configure your docker instance, here 
     MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
     EXPOSE 80
-    CMD ["/sbin/my_init"] 
-    
+    CMD ["/sbin/my_init"]
+
 Build your docker image:
 
     docker build -t "someorg/someproject:v1" .
@@ -45,7 +47,7 @@ As google told us we need to have ssl everywhere, thanks to letsencrypt we have 
 ### Use it behind [jwilder proxy](https://github.com/jwilder/nginx-proxy) and [jrcs letsencrypt companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion)
 
     PROJECT_NAME=someproject DOMAIN_NAMES="www.awesomedomain.com,amazingotherdomain.xyz" && docker run -e VIRTUAL_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_EMAIL="jc@houseofagile.com" -h $PROJECT_NAME --name $PROJECT_NAME -d -P someorg/someproject:v1
-    
+
 You should be able to connect with:
 
     docker exec -it someproject bash
