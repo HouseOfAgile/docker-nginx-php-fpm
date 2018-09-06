@@ -9,11 +9,12 @@ Based on nginx and php-fpm
 Support for bash-profile
 Support for symfony manager
 
-## Raw usage with php5-fpm
+## Raw usage with php5-fpm or php7 versions
 Use the php5-fpm version
 - [`Dockerfile for php 5.6`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php5)
 - [`Dockerfile for php 7.0`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php7.0)
 - [`Dockerfile for php 7.1`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php7.1)
+- [`Dockerfile for php 7.2`](https://github.com/HouseOfAgile/docker-nginx-php-fpm/tree/master/Dockerfile.php7.2)
 
 ## pull image from docker hub
 ### php5-fpm
