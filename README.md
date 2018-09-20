@@ -4,10 +4,9 @@ docker-nginx-php-fpm
 [![](https://badge.imagelayers.io/houseofagile/docker-nginx-php-fpm:latest.svg)](https://imagelayers.io/?images=houseofagile/docker-nginx-php-fpm:latest 'Get your own badge on imagelayers.io')
 
 
-Simple docker for symfony projects.
-Based on nginx and php-fpm
-Support for bash-profile
-Support for symfony manager
+* Simple docker for projects based on php
+* based on nginx and php-fpm
+* support for bash-profile
 
 ## Raw usage with php5-fpm or php7 versions
 Use the php5-fpm version
@@ -33,9 +32,12 @@ Use the php5-fpm version
 
 Use either docker compose or Dockerfile to configure your docker instance, here is a simple example :
 
-    FROM houseofagile/docker-nginx-php-fpm:php5
+    FROM houseofagile/docker-nginx-php-fpm:php7.2
 
-    MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
+    # add your files
+    ADD ./config/projects /root/projects
+    ADD ./config/ssh-keys /root/ssh-keys
+    ADD ./config/sm-config /root/.symfony-manager/sm-config
 
     EXPOSE 80
     CMD ["/sbin/my_init"]

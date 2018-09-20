@@ -1,8 +1,6 @@
-FROM phusion/baseimage:0.9.19
+FROM phusion/baseimage:0.11
 
 MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
-
-ENV HOME /root
 
 # PHP 5.6
 RUN export DEBIAN_FRONTEND=noninteractive && \
@@ -31,17 +29,20 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   php5.6-intl \
   python \
   g++ \
-  make && \
+  make \
+  sudo && \
   chown www-data -R /usr/share/nginx/ && \
   echo "source ~/.bashrc">>/root/.bash_profile && \
   curl -sSL https://raw.github.com/beaudev/bash-profile/master/install-bash-profile.sh|bash && \
   apt-get clean && rm -rf /tmp/* /var/tmp/* && \
   service php5.6-fpm start
 
+RUN useradd -d /home/hoauser -ms /bin/bash -g root -G sudo,www-data -p hoauser ${DEPL_USER_PASSWORD:-hoauser} && \
+  echo "hoauser ALL=(ALL) NOPASSWD:ALL">/etc/sudoers.d/90-cloud-init-users
 # generate a simple index file with phpinfo
 ADD nginx-default.conf /etc/nginx/sites-available/default
 RUN sed -i 's#%%php_fpm_sock_file%%#/var/run/php/php5.6-fpm.sock#g' /etc/nginx/sites-available/default && \
-  echo "<?php\nphpinfo();">/var/www/html/index.php
+  echo "<?php\nphpinfo();\n" >/var/www/html/index.php
 
 # nginx and php-fpm5.6 service
 RUN mkdir /etc/service/01_phpfpm /etc/service/02_nginx
