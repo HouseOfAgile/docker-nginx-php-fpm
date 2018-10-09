@@ -37,8 +37,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
   apt-get clean && rm -rf /tmp/* /var/tmp/* && \
   service php5.6-fpm start
 
-RUN useradd -d /home/hoauser -ms /bin/bash -g root -G sudo,www-data -p hoauser ${DEPL_USER_PASSWORD:-hoauser} && \
-  echo "hoauser ALL=(ALL) NOPASSWD:ALL">/etc/sudoers.d/90-cloud-init-users
+  RUN useradd -d /home/hoauser -ms /bin/bash -g root -G sudo,www-data -p ${DEPL_USER_PASSWORD:-hoauser} hoauser && \
+    groupadd hoauser && \
+    usermod -aG hoauser hoauser && \
+    echo "hoauser ALL=(ALL) NOPASSWD:ALL">/etc/sudoers.d/90-cloud-init-users
+
 # generate a simple index file with phpinfo
 ADD nginx-default.conf /etc/nginx/sites-available/default
 RUN sed -i 's#%%php_fpm_sock_file%%#/var/run/php/php5.6-fpm.sock#g' /etc/nginx/sites-available/default && \
